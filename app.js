@@ -30,7 +30,7 @@ const form = document.getElementById("adddata");
 const searchform = document.getElementById("search");
 const showdata_user = document.getElementById("showdata_user");
 const insert = document.getElementById("insert");
-form.style.display = "none"
+form.style.display = "none";
 
 async function getdata(db) {
   const cvccol = collection(db, "cvc2022");
@@ -39,7 +39,6 @@ async function getdata(db) {
 }
 
 const data = await getdata(db);
-
 
 function showdata(user) {
   const h5 = document.createElement("h5");
@@ -61,15 +60,12 @@ function showdata(user) {
   button.addEventListener("click", (e) => {
     let value = e.target.value;
     //console.log(value);
-    deleteDoc(doc(db, "cvc2022", value));
-    alert("ลบเรียบร้อย")
-    cleardata ()
-    data.forEach((element) => {
-      showdata(element);
-    });
+     deleteDoc(doc(db, "cvc2022", value));
+     setTimeout(() => {
+      alert("ลบสำเร็จ")
+    },1000)
   });
 }
-
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -79,40 +75,40 @@ form.addEventListener("submit", (e) => {
     name: form.name.value,
     character: form.character.value,
   });
-  
- alert("บันทึกเรียบร้อย")
-    cleardata ()
-    data.forEach((element) => {
-      showdata(element);
-    });
+  setTimeout(() => {
+    alert("เพิ่มข้อมูลสำเร็จ")
+  },1000)
 });
 
 searchform.addEventListener("submit", (e) => {
   e.preventDefault();
-  cleardata ();
+  cleardata();
   console.log(searchform.s_name.value);
-  if(searchform.s_name.value != ""){
+  if (searchform.s_name.value != "") {
     data.forEach((element) => {
       if (element.data().name == searchform.s_name.value) {
         showdata(element);
       }
     });
-  }else{
-    data.forEach((element) => {
-        showdata(element);
-      });
+  } else {
+    fetchdata();
   }
 });
 
-
-function cleardata (){
-  showdata_user.innerHTML = ""
+function fetchdata(where) {
+  data.forEach((element) => {
+    showdata(element);
+  });
 }
 
-insert.addEventListener('click',function(){
-  if(form.style.display == "flex"){
-    form.style.display = "none"
-  }else{
-    form.style.display = "flex"
+function cleardata() {
+  showdata_user.innerHTML = "";
+}
+
+insert.addEventListener("click", function () {
+  if (form.style.display == "flex") {
+    form.style.display = "none";
+  } else {
+    form.style.display = "flex";
   }
-})
+});
