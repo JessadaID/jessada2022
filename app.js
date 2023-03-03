@@ -62,7 +62,7 @@ function showdata(user) {
     let value = e.target.value;
     //console.log(value);
     deleteDoc(doc(db, "cvc2022", value));
-    setTimeout(alert("ลบเรียบร้อย"),1000)
+    alert("ลบเรียบร้อย")
     cleardata ()
     data.forEach((element) => {
       showdata(element);
@@ -80,7 +80,7 @@ form.addEventListener("submit", (e) => {
     character: form.character.value,
   });
   
-  setTimeout(alert("บันทึกเรียบร้อย"),1000)
+ alert("บันทึกเรียบร้อย")
     cleardata ()
     data.forEach((element) => {
       showdata(element);
