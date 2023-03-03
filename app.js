@@ -62,7 +62,11 @@ function showdata(user) {
     let value = e.target.value;
     //console.log(value);
     deleteDoc(doc(db, "cvc2022", value));
-    alert("ลบเรียบร้อย");
+    setTimeout(alert("ลบเรียบร้อย"),1000)
+    cleardata ()
+    data.forEach((element) => {
+      showdata(element);
+    });
   });
 }
 
@@ -75,7 +79,12 @@ form.addEventListener("submit", (e) => {
     name: form.name.value,
     character: form.character.value,
   });
-  alert("บันทึกเรียบร้อย");
+  
+  setTimeout(alert("บันทึกเรียบร้อย"),1000)
+    cleardata ()
+    data.forEach((element) => {
+      showdata(element);
+    });
 });
 
 searchform.addEventListener("submit", (e) => {
@@ -90,7 +99,6 @@ searchform.addEventListener("submit", (e) => {
     });
   }else{
     data.forEach((element) => {
-
         showdata(element);
       });
   }
